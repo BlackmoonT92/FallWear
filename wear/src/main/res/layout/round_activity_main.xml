@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="be.ehb.fallwear.MainActivity"
+    tools:deviceIds="wear_round">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="txtFallen"
+        android:id="@+id/txtFallen"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignTop="@+id/txtRunning"
+        android:layout_toStartOf="@+id/btnStop" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/txtRunning"
+        android:layout_gravity="center_horizontal"
+        android:layout_above="@+id/btnReset"
+        android:layout_toEndOf="@+id/btnReset" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start"
+        android:id="@+id/btnStart"
+        android:layout_gravity="center_horizontal"
+        android:onClick="onStartClick"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/btnStop" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stop"
+        android:id="@+id/btnStop"
+        android:layout_gravity="center_horizontal"
+        android:onClick="onStopClick"
+        android:layout_below="@+id/btnStart"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Simulate"
+        android:id="@+id/btnReset"
+        android:layout_gravity="center_horizontal"
+        android:onClick="onSimulateFall"
+        android:layout_below="@+id/btnStop"
+        android:layout_alignStart="@+id/btnStop" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send"
+        android:id="@+id/btnSend"
+        android:layout_gravity="center_horizontal"
+        android:onClick="onSendClick"
+        android:layout_below="@+id/btnReset"
+        android:layout_alignEnd="@+id/btnReset" />
+
+</RelativeLayout>

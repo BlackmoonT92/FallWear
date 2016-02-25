@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">FallWear</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="hello_round">Hello Round World!</string>
+    <string name="hello_square">Hello Square World!</string>
+    <string name="youhavefallen">"You have fallen %1$d times "</string>
+    <string name="running">"Running"</string>
+    <string name="stopped">"Stopped</string>
+</resources>
