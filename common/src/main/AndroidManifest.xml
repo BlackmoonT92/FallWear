@@ -1,0 +1,15 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="be.ehb.common">
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+
+        <service
+            android:name="be.ehb.common.FallDetectionService"
+            android:exported="false"/>
+
+    </application>
+
+</manifest>
