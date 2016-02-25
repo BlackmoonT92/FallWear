@@ -99,10 +99,14 @@ public class RegistrationIntentService extends IntentService {
      */
     // [START subscribe_topics]
     private void subscribeTopics(String token) throws IOException {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         GcmPubSub pubSub = GcmPubSub.getInstance(this);
 
         pubSub.subscribe(token,QuickstartPreferences.TOPIC_GLOBAL,null);
         pubSub.subscribe(token,QuickstartPreferences.TOPIC_FALLENAPP,null);
+
+        sharedPreferences.edit().putBoolean(QuickstartPreferences.REGISTRATION_TOPICS, true).apply();
+
     }
     // [END subscribe_topics]
 

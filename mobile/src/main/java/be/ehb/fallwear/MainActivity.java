@@ -27,6 +27,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     private BroadcastReceiver mUnRegisterBroadcastReceiver;
     private ProgressBar mRegistrationProgressBar;
     private TextView mInformationTextView;
+    private Button mBtnReg;
+    private Button mBtnUnReg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +52,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mRegistrationProgressBar = (ProgressBar) findViewById(R.id.registrationProgressBar);
+        mBtnReg = (Button) findViewById(R.id.btnReg);
+        mBtnUnReg = (Button) findViewById(R.id.bntUnReg);
+
+
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 mRegistrationProgressBar.setVisibility(ProgressBar.GONE);
+                mBtnReg.setVisibility(View.GONE);
+                mBtnUnReg.setVisibility(View.VISIBLE);
+                mBtnReg.setEnabled(true);
+                mInformationTextView.setVisibility(View.VISIBLE);
+
                 SharedPreferences sharedPreferences =
                         PreferenceManager.getDefaultSharedPreferences(context);
                 boolean sentToken = sharedPreferences
@@ -71,18 +83,17 @@ public class MainActivity extends AppCompatActivity {
         mUnRegisterBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                mRegistrationProgressBar.setVisibility(ProgressBar.VISIBLE);
+                mRegistrationProgressBar.setVisibility(ProgressBar.GONE);
+                mInformationTextView.setVisibility(View.VISIBLE);
+                mBtnReg.setVisibility(View.VISIBLE);
+                mBtnUnReg.setVisibility(View.GONE);
+                mBtnUnReg.setEnabled(true);
                 mInformationTextView.setText(R.string.unregistered);
             }
         };
 
         mInformationTextView = (TextView) findViewById(R.id.informationTextView);
 
-        if (checkPlayServices()) {
-            // Start IntentService to register this application with GCM.
-            Intent intent = new Intent(this, RegistrationIntentService.class);
-            startService(intent);
-        }
     }
 
     @Override
@@ -92,6 +103,20 @@ public class MainActivity extends AppCompatActivity {
                 new IntentFilter(QuickstartPreferences.REGISTRATION_COMPLETE));
         LocalBroadcastManager.getInstance(this).registerReceiver(mUnRegisterBroadcastReceiver,
                 new IntentFilter(QuickstartPreferences.UNREGISTRATION_COMPLETE));
+
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(this);
+
+        boolean regTopic = sharedPreferences.
+                getBoolean(QuickstartPreferences.REGISTRATION_TOPICS, false);
+
+        if (regTopic){
+            mRegistrationBroadcastReceiver.onReceive(this,null);
+        }
+        else
+        {
+            mUnRegisterBroadcastReceiver.onReceive(this,null);
+        }
     }
 
     @Override
@@ -125,7 +150,25 @@ public class MainActivity extends AppCompatActivity {
     public void unRegClick(View view){
         if (checkPlayServices()) {
             Log.i(TAG,"UnReg Clicked");
+            mRegistrationProgressBar.setVisibility(ProgressBar.VISIBLE);
+            mBtnUnReg.setEnabled(false);
+            mInformationTextView.setText(getString(R.string.unregistering_message));
+
             Intent intent = new Intent(this, UnRegistrationIntentService.class);
+            startService(intent);
+        }
+    }
+
+    public void regClick(View view){
+        // register topics on GCM
+        mRegistrationProgressBar.setVisibility(ProgressBar.VISIBLE);
+        mInformationTextView.setVisibility(View.VISIBLE);
+        mBtnReg.setEnabled(false);
+        mInformationTextView.setText(getString(R.string.registering_message));
+
+        if (checkPlayServices()) {
+            // Start IntentService to register this application with GCM.
+            Intent intent = new Intent(this, RegistrationIntentService.class);
             startService(intent);
         }
     }

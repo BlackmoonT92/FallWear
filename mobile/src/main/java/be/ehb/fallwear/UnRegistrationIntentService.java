@@ -32,7 +32,7 @@ public class UnRegistrationIntentService extends IntentService {
 
         try {
             String token = sharedPreferences.getString(QuickstartPreferences.TOKEN, "");
-            unsubscribeTopics(token);
+            unSubscribeTopics(token);
 
             InstanceID instanceID = InstanceID.getInstance(this);
             instanceID.deleteInstanceID();
@@ -59,9 +59,11 @@ public class UnRegistrationIntentService extends IntentService {
         LocalBroadcastManager.getInstance(this).sendBroadcast(unregistrationComplete);
     }
 
-    private void unsubscribeTopics(String token) throws IOException {
+    private void unSubscribeTopics(String token) throws IOException {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         GcmPubSub pubSub = GcmPubSub.getInstance(this);
         pubSub.unsubscribe(token, QuickstartPreferences.TOPIC_GLOBAL);
         pubSub.unsubscribe(token, QuickstartPreferences.TOPIC_FALLENAPP);
+        sharedPreferences.edit().putBoolean(QuickstartPreferences.REGISTRATION_TOPICS, false).apply();
     }
 }

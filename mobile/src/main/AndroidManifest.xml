@@ -72,7 +72,7 @@
 
         <activity
             android:name=".IncommingAlarm"
-            android:label="@string/title_activity_incomming_alarm"
+            android:label="@string/title_activity_incoming_alarm"
             android:screenOrientation="portrait" />
 
         <service
