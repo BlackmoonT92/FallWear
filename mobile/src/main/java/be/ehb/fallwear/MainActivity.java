@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+
         mUnRegisterBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
