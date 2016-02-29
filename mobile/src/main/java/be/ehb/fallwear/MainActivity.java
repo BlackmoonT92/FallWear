@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
                 mBtnReg.setEnabled(true);
                 mInformationTextView.setVisibility(View.VISIBLE);
 
+
+
                 SharedPreferences sharedPreferences =
                         PreferenceManager.getDefaultSharedPreferences(context);
                 boolean sentToken = sharedPreferences
