@@ -29,6 +29,8 @@ import com.google.android.gms.iid.InstanceID;
 
 import java.io.IOException;
 
+import be.ehb.common.AppConstants;
+
 public class RegistrationIntentService extends IntentService {
 
     private static final String TAG = "RegIntentService";
@@ -102,8 +104,8 @@ public class RegistrationIntentService extends IntentService {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         GcmPubSub pubSub = GcmPubSub.getInstance(this);
 
-        pubSub.subscribe(token,QuickstartPreferences.TOPIC_GLOBAL,null);
-        pubSub.subscribe(token,QuickstartPreferences.TOPIC_FALLENAPP,null);
+        pubSub.subscribe(token, AppConstants.TOPIC_GLOBAL,null);
+        pubSub.subscribe(token,AppConstants.TOPIC_FALLENAPP,null);
 
         sharedPreferences.edit().putBoolean(QuickstartPreferences.REGISTRATION_TOPICS, true).apply();
 

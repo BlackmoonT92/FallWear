@@ -43,6 +43,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import be.ehb.common.AppConstants;
+
 public class MyGcmListenerService extends GcmListenerService {
 
     private static final String TAG = "MyGcmListenerService";
@@ -66,9 +68,9 @@ public class MyGcmListenerService extends GcmListenerService {
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "Message: " + message);
 
-        if (from.startsWith(QuickstartPreferences.TOPIC_FALLENAPP)) {
+        if (from.startsWith(AppConstants.TOPIC_FALLENAPP)) {
             Log.d(TAG, "from fallen");
-            if (QuickstartPreferences.MSG_FALLEN.equals(message)){
+            if (AppConstants.MSG_FALLEN.equals(message)){
                 Log.d(TAG, "has fallen");
                 Intent startIntent = new Intent(this,IncommingAlarm.class);
                 startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

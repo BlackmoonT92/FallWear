@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <!-- [END gcm_permission] -->
 
@@ -22,7 +23,6 @@
 
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -72,7 +72,7 @@
 
         <activity
             android:name=".IncommingAlarm"
-            android:label="@string/title_activity_incoming_alarm"
+            android:label="@string/app_name"
             android:screenOrientation="portrait" />
 
         <service

@@ -12,6 +12,8 @@ import com.google.android.gms.iid.InstanceID;
 
 import java.io.IOException;
 
+import be.ehb.common.AppConstants;
+
 
 /**
  * Created by davy.van.belle on 11/02/2016.
@@ -62,8 +64,8 @@ public class UnRegistrationIntentService extends IntentService {
     private void unSubscribeTopics(String token) throws IOException {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         GcmPubSub pubSub = GcmPubSub.getInstance(this);
-        pubSub.unsubscribe(token, QuickstartPreferences.TOPIC_GLOBAL);
-        pubSub.unsubscribe(token, QuickstartPreferences.TOPIC_FALLENAPP);
+        pubSub.unsubscribe(token, AppConstants.TOPIC_GLOBAL);
+        pubSub.unsubscribe(token, AppConstants.TOPIC_FALLENAPP);
         sharedPreferences.edit().putBoolean(QuickstartPreferences.REGISTRATION_TOPICS, false).apply();
     }
 }

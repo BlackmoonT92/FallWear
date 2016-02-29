@@ -13,4 +13,6 @@ public class AppConstants {
     //public static final String GCM_KEY = "AIzaSyDYOIqybD8-kr76NU9bRdUYMtrWX2vlySk";
     public static final String GCM_KEY = "AIzaSyCdtDrP2-QsermEY45qYt5PxwxdPVNHsMo";
     public static final String GCM_URL = "http://android.googleapis.com/gcm/send";
+
+    public static final String phoneNumber = "04867410**";
 }

@@ -1,22 +1,28 @@
 package be.ehb.fallwear;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+
+import be.ehb.common.AppConstants;
 
 public class IncommingAlarm extends Activity {
 
     private static final String TAG = "IncommingAlarm";
 
-    private static final long[] pattern = { 0, 800, 500  };
+    private static final long[] pattern = {0, 800, 500};
 
     Vibrator vibrator;
 
@@ -31,24 +37,24 @@ public class IncommingAlarm extends Activity {
 
         setContentView(R.layout.activity_incomming_alarm);
 
-       // playRingtone();
+        // playRingtone();
 
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         AudioManager audio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
 
-        switch( audio.getRingerMode() ){
+        switch (audio.getRingerMode()) {
             case AudioManager.RINGER_MODE_NORMAL:
                 Log.d(TAG, "Normal Mode");
                 startVibrate();
                 playRingtone();
                 break;
             case AudioManager.RINGER_MODE_SILENT:
-                Log.d(TAG,"Silent Mode");
+                Log.d(TAG, "Silent Mode");
                 break;
             case AudioManager.RINGER_MODE_VIBRATE:
-                Log.d(TAG,"Vibrate Mode");
+                Log.d(TAG, "Vibrate Mode");
                 startVibrate();
                 break;
         }
@@ -81,6 +87,27 @@ public class IncommingAlarm extends Activity {
         stopRingtone();
         stopVibrate();
         finish();
+    }
+
+    public void onBtnCallClick(View view) {
+        Log.d(TAG, "Calling...");
+
+        //TEL CALL
+        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + AppConstants.phoneNumber));
+        //Intent intent = new Intent(Intent.ACTION_DIAL);
+
+        //SKYPE Call
+        //Intent intent = new Intent("android.intent.action.VIEW",Uri.parse("skype:" + AppConstants.SKYPE_USER));
+
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            Log.d(TAG,"Not Granted");
+            return;
+        }
+
+        Log.d(TAG, "starting call");
+        startActivity(intent);
+        onBtnDismissClick(view);
     }
 
     private void startVibrate(){

@@ -23,8 +23,8 @@ public class QuickstartPreferences {
     public static final String UNREGISTRATION_COMPLETE = "unregistrationComplete";
     public static final String TOKEN = "myToken";
 
-    public static final String TOPIC_GLOBAL = "/topics/global";
-    public static final String TOPIC_FALLENAPP = "/topics/fallenApp";
+    //public static final String TOPIC_GLOBAL = "/topics/global";
+    //public static final String TOPIC_FALLENAPP = "/topics/fallenApp";
 
     public static final String MSG_FALLEN = "be.ehb.msg_fallen";
     public static final String REGISTRATION_TOPICS = "topicsRegistered";

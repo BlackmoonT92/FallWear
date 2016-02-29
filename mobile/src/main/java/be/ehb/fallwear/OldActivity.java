@@ -67,7 +67,7 @@ public class OldActivity extends AppCompatActivity implements MessageHandler.Fal
     @Override
     public void hasFallen(int times) {
         TextView txtFallen = (TextView) findViewById(id.txtFallen);
-        String fallenFormat = getResources().getString(string.you_have_fallen);
+        String fallenFormat = getResources().getString(R.string.you_have_fallen);
         String fallenMsg = String.format(fallenFormat, times);
         txtFallen.setText(fallenMsg);
     }
@@ -76,9 +76,9 @@ public class OldActivity extends AppCompatActivity implements MessageHandler.Fal
     public void onRunningChanged(boolean running) {
         TextView txtRunning = (TextView) findViewById(id.txtRunning);
         if (running) {
-            txtRunning.setText(string.running);
+            txtRunning.setText(R.string.running);
         } else {
-            txtRunning.setText(string.stopped);
+            txtRunning.setText(R.string.stopped);
         }
     }
 }
