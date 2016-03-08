@@ -15,7 +15,7 @@ public class FallSensorEventListener implements SensorEventListener {
     private float[]  gforce = new float[3];
 
     private final float T1 = 0.4f;
-    private final float T2 = 1.7f;
+    private final float T2 = 1.5f;
     private final float mean = 1.0f;
     private final float hist = 0.1f;
 

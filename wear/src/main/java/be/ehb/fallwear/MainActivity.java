@@ -147,6 +147,7 @@ public class MainActivity extends Activity implements MessageHandler.FallingEven
         final Map<String, String> mHeaders = new HashMap<String, String>();
         mHeaders.put("Authorization", "key=" + AppConstants.GCM_KEY);
         mHeaders.put("Content-Type", "application/json");
+        Log.d(TAG, AppConstants.GCM_KEY);
 
 
 // Request a string response from the provided URL.
@@ -169,8 +170,16 @@ public class MainActivity extends Activity implements MessageHandler.FallingEven
             public Map<String, String> getHeaders() throws AuthFailureError {
                 return mHeaders;
             }
+
+            @Override
+            public String getBodyContentType() {
+                Log.d(TAG, "BodyContent");
+                return "application/json";
+            }
+
             @Override
             public byte[] getBody() throws AuthFailureError {
+                Log.d(TAG, "get body called");
                 JSONObject obj = new JSONObject();
                 JSONObject msg = new JSONObject();
 
@@ -194,7 +203,7 @@ public class MainActivity extends Activity implements MessageHandler.FallingEven
                 // usually you'd have a field with some values you'd want to escape, you need to do it yourself if overriding getBody. here's how you do it
 
                 */
-                Log.i(TAG,obj.toString());
+                Log.d(TAG,obj.toString());
 
                 return obj.toString().getBytes();
             }
